@@ -1,0 +1,50 @@
+* extend sockets day 1 to go more in-depth on various types/families/protocols
+* day 1 exercise is writing a packet-sniffer in python, then using it to look
+  at network traffic.
+
+* day two of sockets then implements simple echo server/client in TCP and a
+  second one in UDP.
+
+* day three discuss protocols, implement HTTP server using echo server base
+
+* day four, discuss strategies for parallelism, incorporate select into the 
+  http server 
+
+
+
+six weeks, 24 sessions:
+
+Week 1: Python Review/Update (including editor/environment, testing)
+Week 2: Python Networking, low-level (sockets, protocols, communications)
+Week 3: APIs and Libraries (consuming and creating data on and off-line)
+Week 4: Networking Project...??? (build some sort of simple wsgi app)
+
+Week 5: Flask and microframeworks (dbapi2, sqlalchemy)
+Week 6: Django and full-stack frameworks (django ORM)
+Week 7: Traversal, ZODB, Pyramid
+Week 8: Web Project (pick a framework and build something non-trivial)
+
+incorporate deployment strategies and ci integration along the way.
+
+
+
+
+
+* Write a packet-sniffer in python, implement at least IP and TCP protocols,
+make friendly output
+
+http://www.binarytides.com/python-packet-sniffer-code-linux/
+
+
+* https://ep2013.europython.eu/media/conference/slides/using-sockets-in-python.html
+
+
+Editor Setup
+
+    Sublime Text 2
+        Installing Plugins
+            Theme, Color Scheme
+
+        Custom Snippets "pdb"-Tab for breakpoint
+        PdbSublimeTextSupport for code following
+        
