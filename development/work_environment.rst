@@ -109,3 +109,42 @@ editing experience for rst authors.
 .. _reStructuredText Improved: https://sublime.wbond.net/packages/RestructuredText%20Improved
 
 
+I want to have inline code linting set up so I chose to use the 
+`SublimeLinter`_ plugin with the `pep8`_ extension installed for python files.
+Setup for this one is a bit tricky.
+
+First, I created a virtualenv where I can install packages I need to support
+the function of the linter.  I installed pep8 into this virtualenv. Then I
+installed the ``SublimeLinter`` plugin using the package manager. Before
+installing the pep8 linter extension I needed to set some important settings
+for ``SublimeLinter`` (Preferences -> Package Settings -> SublimeLinter ->
+Settings - User):
+
+.. code-block:: json
+
+        "paths": {
+            "linux": [],
+            "osx": [
+                "/Users/cewing/virtualenvs/sublenv/bin"
+            ],
+            "windows": []
+        },
+        "python_paths": {
+            "linux": [],
+            "osx": [
+                "/Users/cewing/virtualenvs/sublenv/bin"
+            ],
+            "windows": []
+        },
+
+The ``"paths"`` key points to additional paths that will contain executables to
+be used for linting, like pep8.  I point it to the virtualenv that contains my
+pep8.  The ``"python_paths"`` key holds references to paths where the python
+executable to be used will be located.  By default this will be something like
+``/usr/bin/python``, so to ensure that I had a match between the python used,
+and the linter to run, I made sure that the paths for both were set to the same
+location.
+
+.. _pep8: https://sublime.wbond.net/packages/SublimeLinter-pep8
+
+.. _SublimeLinter: http://sublimelinter.readthedocs.org/en/latest/index.html
