@@ -1,5 +1,6 @@
+***********************************
 Setting Up Your Working Environment
-===================================
+***********************************
 
  * Good editor
  	* tab completion
@@ -11,7 +12,7 @@ Setting Up Your Working Environment
  * You should be able to use the same editor in whatever environment you find yourself.
 
 Sublime Text
-------------
+============
 
  * supports all platforms (Win, OSX, Linux) except BSD/FreeBSD :(
  * Highly configurable
@@ -68,6 +69,9 @@ follows:
  * type the name of the package you want to install (or part of it) and select
    the match from the list
 
+Text wrapping
++++++++++++++
+
 I like more control over text wrapping, so I first installed 
 `Wrap Plus <https://github.com/ehuss/Sublime-Wrap-Plus>`_.  This allows me to 
 have a keyboard command that will hard-wrap text at the value of my
@@ -87,6 +91,9 @@ There are also a couple of settings that require updating for me:
 	"WrapPlus.break_long_words": false,
 	"WrapPlus.break_on_hyphens": false
 
+
+reStructuredText
+++++++++++++++++
 
 I write a lot of RestructuredText (rst) so I want a plugin that will offer me
 colorization and snippets for things I do in that language.  The best one I've
@@ -109,9 +116,16 @@ editing experience for rst authors.
 .. _reStructuredText Improved: https://sublime.wbond.net/packages/RestructuredText%20Improved
 
 
+Linting
++++++++
+
 I want to have inline code linting set up so I chose to use the 
 `SublimeLinter`_ plugin with the `pep8`_ extension installed for python files.
 Setup for this one is a bit tricky.
+
+.. _pep8: https://sublime.wbond.net/packages/SublimeLinter-pep8
+
+.. _SublimeLinter: http://sublimelinter.readthedocs.org/en/latest/index.html
 
 First, I created a virtualenv where I can install packages I need to support
 the function of the linter.  I installed pep8 into this virtualenv. Then I
@@ -145,6 +159,96 @@ executable to be used will be located.  By default this will be something like
 and the linter to run, I made sure that the paths for both were set to the same
 location.
 
-.. _pep8: https://sublime.wbond.net/packages/SublimeLinter-pep8
+Code Completion
++++++++++++++++
 
-.. _SublimeLinter: http://sublimelinter.readthedocs.org/en/latest/index.html
+Code Completion is another important aspect of efficient code writing.  I want
+a plugin that will work not only for stock Python symbols, but also for
+packages that I include in my project.  There are two candidates that I can
+find.  The first is `SublimeCodeIntel`_. the second is `SublimeJedi`_.  The
+former has the advantage of supporting a wide variety of languages. The latter
+uses the `Jedi`_ code completion library.
+
+.. _Jedi: https://github.com/davidhalter/jedi
+
+.. _SublimeJedi: https://sublime.wbond.net/packages/Jedi%20-%20Python%20autocompletion
+
+.. _SublimeCodeIntel: https://sublime.wbond.net/packages/SublimeCodeIntel
+
+I chose the latter. The primary reason was that I could get it running quickly.
+I have heard very good things about ``SublimeCodeIntel`` but when I tried to
+install and configure it, it overran my CPU, spiking to 100+% and remaining
+there for more than 10 minutes before I killed the sublime text process to
+recover.
+
+Once installed, the package provides the ability to set a python interpreter
+and additional paths via a project file. For a lot of my work, this is perfect,
+as I use buildout and have a python plus an omelette directory that contains
+all the source for my project.  Yay!
+
+
+Git Helpers
+===========
+
+I use git for my source control, and there are a couple of nice add-ons and
+tricksy commands you can use to make working with git a bit easier.
+
+
+git-completion
+--------------
+
+The ability to tab-complete things like branch names, subcommands and more is
+really helpful when you work in git all day long. Luckily, the nice folk who
+come up with such things have created a bash script that can do just that:
+`git-completion.bash`_. To use it, you simply download the source for your
+particular version of git (the link for that script points to the version I had
+installed when I wrote this) and put it somewhere.  Then you can use the
+``source`` command from your ``.profile`` to include that code in bash whenever
+you run a terminal:
+
+.. code-block:: bash
+
+    source ~/.git-completion.bash
+
+.. _git-completion.bash: https://raw.github.com/git/git/v1.8.4.2/contrib/completion/git-completion.bash
+
+I found a nifty script online that `does this automatically`_ for OS X.
+
+.. _does this automatically: https://gist.github.com/johngibb/972430
+
+git-prompt
+----------
+
+Keeping track mentally of the state of your working directory can also be quite
+challenging in when using git. There've certainly been a number of times I've
+committed a change, only to look up and realize I was on the wrong branch. Git
+provides ways to dig yourself out of holes like that (thankfully), but it's
+also nice to have visual reminders to help out.  The `git-prompt.sh`_ shell
+script helps with this. Like ``git-completion.bash`` above, you copy this file 
+to your home directory and then ``source`` it from your ``.profile``:
+
+.. code-block:: bash
+
+    source ~/.git-prompt.sh
+
+Once you've done this, you can use the ``__git_ps1`` command, and a number of
+environmental variables, to configure ``PS1`` and change your terminal prompt
+to show the current branch of a repository when you are inside one. You can get
+information about the status of HEAD, modified files, stashes, untracked files
+and more, all with the possiblity of color output.  And if you aren't in a
+repo, you can set up ``PS!`` to look just like your normal command prompt!
+There's really decent documentation in the shell script about the options
+available.
+
+My configuration looks like this:
+
+.. code-block:: bash
+
+    source ~/.git-prompt.sh
+    GIT_PS1_SHOWDIRTYSTATE=1
+    GIT_PS1_SHOWCOLORHINTS=1
+    GIT_PS1_SHOWSTASHSTATE=1
+    GIT_PS1_SHOWUPSTREAM="auto"
+    PROMPT_COMMAND='__git_ps1 "" "\h:\W \u\\\$ " "[%s]\n"'
+
+.. _git-prompt.sh: https://raw.github.com/git/git/master/contrib/completion/git-prompt.sh
