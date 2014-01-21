@@ -1,0 +1,63 @@
+Snapshot of the item below:
+
+Welcome to Code Fellows and our Python Network Programming class (Course code:
+FIXME). You're part of an amazing group of students and we are very excited to
+have you as part of the class.
+
+Preparation for class:
+
+If you are totally new to Python, fear not.  We will spend the first week of
+class in an intensive review of Python to ensure that we all have a certain
+baseline of knowledge.
+
+To guage your current basic Python comfort level, I have a task for you to
+complete as soon as possible.  Please go to http://codingbat.com/ and sign up
+for an account. You'll find a set of Python exercises.  Please work through
+them all as quickly as you can (there are a total of 8, including the two
+'warmup' sections). When you're done, go to "prefs" (link at the top left) and
+share your results with me (use the email address 'cris@crisewing.com').
+
+Have your Mac or Linux laptop working, with plenty of free space on the hard
+drive. If you're on Windows, please get a dual-boot or Virtual Machine with
+Linux set up. Choose Ubuntu if you are new to Linux. If you are a very strong
+windows user, you may choose to continue working there, but I will be
+restricted in my ability to help you work through issues with your OS.
+
+Mac OS X: Please download XCode (v5) from the Mac App Store in advance, and
+install the command line tools. We will work on further environmental setup in
+class on the first day.
+
+Learn more about your tools!
+
+Learn about the command line (Mac or Linux)
+
+An Editor. If you already rock Vim or Emacs, that’s fine. Others should start
+with one of these two:
+
+ Sublime Text Editor (if you are already very comfortable with another
+ editor/IDE you may use that.) Install Sublime Text 2.  If you are comfortable
+ with another editor/IDE, you can continue to use that) Take the NetTuts free
+ Sublime Text 2 course
+
+If you want a great free alternative to Sublime, use Brackets.
+
+Learn the basics of Git and GitHub. Here’s a great interactive tutorial on Git.
+Or, you make like a free book better.
+
+Learn some basic ruby. http://tryruby.org and if you’ve already know the basics
+try http://rubykoans.com/
+
+Look for an invitation soon to take the pre-class assessment survey. It’s
+important to take the survey so that we know the best place to start for you
+and your class as a whole.
+
+Our first class meeting will be Monday morning, Jan 13th, at 9am, downstairs,
+in The Easy at TechStars. 511 Boren Ave N, Seattle, WA. Bring your laptop.
+There is some street parking if you are here early, and also paid lots. We are
+also one block away from the Seattle Streetcar.
+
+If you have any questions or run into any problems, reply to this email and we'll help fix it. See you soon!
+
+Lindy Merida, Brook Riggio, Ivan Storck
+
+Code Fellows

@@ -7,8 +7,8 @@
 
 * day three discuss protocols, implement HTTP server using echo server base
 
-* day four, discuss strategies for parallelism, incorporate select into the 
-  http server 
+* day four, discuss strategies for parallelism, incorporate select into the
+  http server
 
 
 
