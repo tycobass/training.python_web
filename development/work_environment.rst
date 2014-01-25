@@ -123,7 +123,7 @@ I want to have inline code linting set up so I chose to use the
 `SublimeLinter`_ plugin with the `pep8`_ extension installed for python files.
 Setup for this one is a bit tricky.
 
-.. _pep8: https://sublime.wbond.net/packages/SublimeLinter-pep8
+.. _pep8: https://sublime.wbond.net/packages/SublimeLinter-flake8
 
 .. _SublimeLinter: http://sublimelinter.readthedocs.org/en/latest/index.html
 
@@ -224,7 +224,7 @@ challenging in when using git. There've certainly been a number of times I've
 committed a change, only to look up and realize I was on the wrong branch. Git
 provides ways to dig yourself out of holes like that (thankfully), but it's
 also nice to have visual reminders to help out.  The `git-prompt.sh`_ shell
-script helps with this. Like ``git-completion.bash`` above, you copy this file 
+script helps with this. Like ``git-completion.bash`` above, you copy this file
 to your home directory and then ``source`` it from your ``.profile``:
 
 .. code-block:: bash
@@ -252,3 +252,90 @@ My configuration looks like this:
     PROMPT_COMMAND='__git_ps1 "" "\h:\W \u\\\$ " "[%s]\n"'
 
 .. _git-prompt.sh: https://raw.github.com/git/git/master/contrib/completion/git-prompt.sh
+
+Adding in virtualenv
+--------------------
+
+The problem with this is that it doesn't play well with another of my favorite
+Python tools, `virtualenv`_. When you activate a virtualenv, it prepends the
+name of the environment you are working on to your command prompt. But it uses
+the standard ``PS1`` shell variable to do this. Since I've already used the
+``PROMPT_COMMAND`` to set my prompt, ``PS1`` doesn't get used, and this nice
+feature of virtualenv is lost.
+
+Luckily, there is a way out. Bash shell scripting offers `parameter expansion`_
+and a trick of the syntax for that can help us. Normally, a shell parameter is
+referenced like so:
+
+.. code-block:: bash
+
+    $ PARAM='foobar'
+    $ echo $PARAM
+    foobar
+
+In complicated situations, you can wrap the name of the paramter in curly
+braces to avoid confusion with following characters:
+
+.. code-block:: bash
+
+    $ echo ${PARAM}andthennotparam
+    foobarandthennotparam
+
+What is not as well known is that this curly-brace syntax has a lot of
+interesting variations. For example, you can use ``PARAM`` as a test and
+actually print something else entirely:
+
+.. code-block:: bash
+
+    $ echo ${PARAM:+'foo'}
+    foo
+    $ echo ${PARAM:+'bar'}
+
+    $
+
+The key here is the ``:<char>`` bit immediately after ``PARAM``. If the ``+``
+char is present, then if ``PARAM`` is unset or null, what comes after is not
+printed, otherwise it is.
+
+When I was looking at the script that `activates a virtualenv in bash`_ I
+noticed that it exports ``VIRTUAL_ENV``. This means that so long as a
+virtualenv is active, this paramter will be set. And it will be unset when no
+environment is active. I can use that!
+
+Armed with this knowledge, I constructed a shell expression that would either
+print the name of the active virtualenv in square brackets, or print nothing if
+no virtualenv was active:
+
+.. code-block:: bash
+
+    $ echo ${VIRTUAL_ENV:+[`basename $VIRTUAL_ENV`]}
+
+    $ source /path/to/someenv/bin/activate
+    $ echo ${VIRTUAL_ENV:+[`basename $VIRTUAL_ENV`]}
+    someenv
+
+
+If I roll that into my ``.profile`` file, I can get everything I want (with a
+little color thrown in for good measure):
+
+.. code-block:: bash
+
+    source ~/.git-prompt.sh
+    # PS1='[\u@\h \W$(__git_ps1 " (%s)")]\$ '
+    GIT_PS1_SHOWDIRTYSTATE=1
+    GIT_PS1_SHOWCOLORHINTS=1
+    GIT_PS1_SHOWSTASHSTATE=1
+    GIT_PS1_SHOWUPSTREAM="auto"
+    Color_Off="\[\033[0m\]"
+    Yellow="\[\033[0;33m\]"
+    PROMPT_COMMAND='__git_ps1 "${VIRTUAL_ENV:+[$Yellow`basename $VIRTUAL_ENV`$Color_Off]\n}" "\h:\W \u\\\$ " "[%s]\n"'
+
+And voilà! I've got a shell prompt that keeps me informed about all the things
+I need to know when working on a daily basis:
+
+
+
+
+.. _virtualenv: http://virtualenv.org
+.. _parameter expansion: http://www.gnu.org/software/bash/manual/bash.html#Shell-Parameter-Expansion
+.. _activates a virtualenv in bash: https://github.com/pypa/virtualenv/blob/develop/virtualenv_embedded/activate.sh
