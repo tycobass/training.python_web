@@ -47,4 +47,4 @@ Editor Setup
 
         Custom Snippets "pdb"-Tab for breakpoint
         PdbSublimeTextSupport for code following
-        
+
