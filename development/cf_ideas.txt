@@ -14,10 +14,10 @@
 
 six weeks, 24 sessions:
 
-Week 1: Python Review/Update (including editor/environment, testing)
-	1: set up, 
+Week 1: Python Review/Update (including editor/environment, debugging, testing)
+	1: set up,
 		in class: intros, get editor, github, virtualenv and venvwrapper working
-		homework: install git-completion and git-prompt
+		homework: python book exercises
 	2: Python Basics
 		in class: everything is an object lecture, finding your way around
 		homework: python book exercises
@@ -41,10 +41,19 @@ Week 2: Python Networking, low-level (sockets, protocols, communications)
 	4: concurrency ?? maybe deployment??
 		in class: greenlets and coroutines ?? or perhaps deployment stack??
 Week 3: APIs and Libraries (consuming and creating data on and off-line)
-	1: 
-	2:
-	3:
-	4:
+	1: Mashups and Introduction to scraping
+		in class: lecture on beautiful soup
+		homework: srape data from a website somewhere.
+	2: Consuming APIs
+		in class: lecture on SOAP/XML-RPC and REST
+		homework: build code to consume data from one or more API sources
+	3: CGI/WSGI
+		in class: lecture on CGI and WSGI, history, structure
+		homework: build a wsgi app (bookdb)
+	4: Serving Data
+		in class: lecture on producing REST services
+		homework: build a wsgi-powered RESTful service that provides data
+				  from your mashup sources.
 Week 4: Networking Project...??? (build some sort of simple wsgi app)
 	project ideas:
 Week 5: Flask and microframeworks (dbapi2, sqlalchemy)
