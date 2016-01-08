@@ -1,0 +1,24 @@
+Server Side
+
+
+In [1]: import sys
+
+In [2]: import socket
+
+In [3]: %paste
+server_socket = socket.socket(
+    socket.AF_INET,
+    socket.SOCK_STREAM,
+    socket.IPPROTO_IP)
+server_socket.bind(('127.0.0.1', 50001))
+server_socket.listen(1)
+conn, addr = server_socket.accept()
+
+## -- End pasted text --
+
+In [4]: msg = conn.recv(4096)
+
+In [5]: msg
+Out[5]: b'Hey, can you hear me now ?'
+
+In [6]: conn.sendall('Yes, I can hear you.'.encode('utf8'))

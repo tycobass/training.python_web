@@ -1,0 +1,20 @@
+Client Side
+
+
+In [1]: import sys
+
+In [2]: import socket
+
+In [3]: client_socket = socket.socket(
+   ...:     socket.AF_INET,
+   ...:     socket.SOCK_STREAM,
+   ...:     socket.IPPROTO_IP)
+
+In [4]: client_socket.connect(('127.0.0.1', 50001))
+
+In [5]: client_socket.sendall('Hey, can you hear me now ?'.encode('utf8'))
+
+In [6]: from_server = client_socket.recv(4096)
+
+In [7]: from_server
+Out[8]: b'Yes, I can hear you.'
