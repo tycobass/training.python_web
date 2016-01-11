@@ -1,3 +1,5 @@
+# echo_server.py
+################
 import socket
 import sys
 
@@ -26,7 +28,8 @@ def server(log_buffer=sys.stderr):
 
     # TODO: bind your new sock 'sock' to the address above and begin to listen
     #       for incoming connections
-    sock.bind(('127.0.0.1', 10000))
+    sock.bind((address))
+    sock.listen(1)
     try:
         # the outer loop controls the creation of new connection sockets. The
         # server will handle each incoming connection one at a time.
@@ -57,12 +60,13 @@ def server(log_buffer=sys.stderr):
                     # TODO: Send the data you received back to the client, log
                     # the fact using the print statement here.  It will help in
                     # debugging problems.
-                    conn.sendall(data.encode('utf8'))
+                    #conn.sendall(data.encode('utf8'))
+                    conn.sendall(data) #no encode
                     print('sent "{0}"'.format(data.decode('utf8')))
 
                     # TODO: Check here to see if the message you've received is
                     # complete.  If it is, break out of this inner loop.
-                    if len(msg_part) < 16:
+                    if len(data) < 16:
                         break
 
             finally:
@@ -81,7 +85,6 @@ def server(log_buffer=sys.stderr):
         #       prevent syntax problems
         sock.close()
         print('quitting echo server', file=log_buffer)
-
 
 if __name__ == '__main__':
     server()
