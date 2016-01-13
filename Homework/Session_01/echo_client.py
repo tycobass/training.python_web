@@ -11,7 +11,7 @@ def client(msg, log_buffer=sys.stderr):
     #       a TCP socket with IPv4 Addressing, call the socket you make 'sock'
     sock = socket.socket(
         socket.AF_INET,
-        socket.SOCK_STREAM, 
+        socket.SOCK_STREAM,
         socket.IPPROTO_IP)
     print('\nconnecting to {0} port {1}'.format(*server_address), file=log_buffer)
 
@@ -19,7 +19,7 @@ def client(msg, log_buffer=sys.stderr):
     sock.connect((server_address))
     # you can use this as a place to accumulate the entire message echoed back
     # from the server
-    #received_message = sock.recv(4096)
+    # received_message = sock.recv(4096)
     # this try/finally block exists purely to allow us to close the socket
     # when we are finished with it
     try:
@@ -52,7 +52,7 @@ def client(msg, log_buffer=sys.stderr):
 
         # TODO: when all is said and done, you should return the reply you got
         # from the server as the value of this function.
-    return(message.decode('utf8'))
+    return message.decode('utf8')
 
 
 if __name__ == '__main__':
