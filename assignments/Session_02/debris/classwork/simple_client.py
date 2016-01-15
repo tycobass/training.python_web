@@ -2,7 +2,7 @@ import socket
 import sys
 
 
-def bytes_client(msg):
+def client(msg):
     server_address = ('localhost', 10000)
     sock = socket.socket(
         socket.AF_INET, socket.SOCK_STREAM, socket.IPPROTO_TCP
@@ -12,7 +12,7 @@ def bytes_client(msg):
         file=sys.stderr
     )
     sock.connect(server_address)
-    response = b''
+    response = ''
     done = False
     bufsize = 1024
     try:
@@ -22,17 +22,21 @@ def bytes_client(msg):
             chunk = sock.recv(bufsize)
             if len(chunk) < bufsize:
                 done = True
-            response += chunk
-        print('received "{0}"'.format(response), file=sys.stderr)
+            response += chunk.decode('utf8')
+           print('received "{0}"'.format(response), file=sys.stderr)
     finally:
         print('closing socket', file=sys.stderr)
-        print('\n\n==================================================\n\n', file=sys.stderr)#for test only - delete
         sock.close()
     return response
 
-
-def client(msg):
-    return bytes_client(msg).decode('utf8')
+def response_ok():
+    """returns a basic HTTP response"""
+    resp = []
+    resp.append(b"HTTP/1.1 200 OK")
+    resp.append(b"Content-Type: text/plain")
+    resp.append(b"")
+    resp.append(b"this is a pretty minimal response")
+    return b"\r\n".join(resp)
 
 
 if __name__ == '__main__':
