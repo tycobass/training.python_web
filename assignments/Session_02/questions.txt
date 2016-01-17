@@ -1,0 +1,8 @@
+tests.py line 288 didn't get NameError
+
+.py 	text/x-script.phyton
+
+
+how do I make contents of variable bytes? resp.append(bytes(body))
+
+

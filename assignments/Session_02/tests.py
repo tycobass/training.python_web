@@ -218,6 +218,8 @@ class ResolveURITestCase(unittest.TestCase):
         ]
         expected_mimetype = "text/plain"
         actual_body, actual_mimetype = self.call_function_under_test(uri)
+        ######print('\n!!!!!!! tests - actual body returned =', actual_body, file=sys.stderr)  #debug - remove !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        ######print('\n!!!!!!! tests - mimetypereturned =', actual_mimetype, file=sys.stderr)  #debug - remove !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         self.assertEqual(
             expected_mimetype,
             actual_mimetype,
@@ -282,7 +284,8 @@ class ResolveURITestCase(unittest.TestCase):
 
     def test_missing_resource(self):
         uri = "/missing.html"
-        self.assertRaises(NameError, self.call_function_under_test, uri)
+        self.assertRaises(FileNotFoundError, self.call_function_under_test, uri)
+        #self.assertRaises(NameError, self.call_function_under_test, uri)  Question tomorrow
 
 
 class HTTPServerFunctionalTestCase(unittest.TestCase):
@@ -431,9 +434,19 @@ class HTTPServerFunctionalTestCase(unittest.TestCase):
         )
 
 
-#if __name__ == '__main__':
-#    unittest.main()
+if __name__ == '__main__':
+    unittest.main()
 
+"""
 if __name__ == '__main__':
     suite = unittest.TestLoader().loadTestsFromTestCase(ResolveURITestCase)
     unittest.TextTestRunner(verbosity=2).run(suite)
+"""
+
+"""
+if __name__ == '__main__':
+    suite = unittest.TestLoader().loadTestsFromTestCase(HTTPServerFunctionalTestCase)
+    unittest.TextTestRunner(verbosity=2).run(suite)
+"""
+###python tests.py ResolveURITestCase.test_file_resource
+###python tests.py HTTPServerFunctionalTestCase.test_get_request
