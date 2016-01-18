@@ -26,13 +26,13 @@ def bytes_client(msg):
         print('received "{0}"'.format(response), file=sys.stderr)
     finally:
         print('closing socket', file=sys.stderr)
-        print('\n\n==================================================\n\n', file=sys.stderr)#for test only - delete
         sock.close()
     return response
 
 
 def client(msg):
     return bytes_client(msg).decode('utf8')
+
 
 
 if __name__ == '__main__':

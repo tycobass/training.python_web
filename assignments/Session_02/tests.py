@@ -3,7 +3,7 @@ import os
 import pathlib
 import socket
 import unittest
-import sys #to support print statements - delete at end !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+import sys
 
 
 CRLF = '\r\n'
@@ -38,9 +38,7 @@ class ResponseOkTestCase(unittest.TestCase):
 
     def call_function_under_test(self, body=b"", mimetype=b"text/plain"):
         """call the `response_ok` function from our http_server module"""
-#        print('!!!!! function_under_test mimetype_one =', mimetype, '\n', file=sys.stderr)  #debug - remove !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         from http_server import response_ok
-#        print('!!!!! function_under_test mimetype_two =', mimetype, '\n', file=sys.stderr)  #debug - remove !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         return response_ok(body=body, mimetype=mimetype)
 
     def test_response_code(self):
@@ -85,14 +83,9 @@ class ResponseOkTestCase(unittest.TestCase):
             b'image/jpeg', b'text/html', b'text/x-python',
         ]
         header_name = b'content-type'
-#        import pdb; pdb.set_trace() #breakpoint - debug - remove !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         for expected in mimetypes:
-#            print('sheadername =', header_name, '\n', file=sys.stderr)  #debug - remove !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-#            print('mimetype =', expected, '\n', file=sys.stderr)  #debug - remove !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             ok = self.call_function_under_test(mimetype=expected)
-#            print('full header =', ok, '\n', file=sys.stderr)  #debug - remove !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             headers = extract_headers(ok)
-#            print('header_list =', headers, '\n', file=sys.stderr)  #debug - remove !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             for header in headers:
                 name, value = header.split(b':')
                 if header_name == name.strip().lower():
@@ -218,8 +211,6 @@ class ResolveURITestCase(unittest.TestCase):
         ]
         expected_mimetype = "text/plain"
         actual_body, actual_mimetype = self.call_function_under_test(uri)
-        ######print('\n!!!!!!! tests - actual body returned =', actual_body, file=sys.stderr)  #debug - remove !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        ######print('\n!!!!!!! tests - mimetypereturned =', actual_mimetype, file=sys.stderr)  #debug - remove !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         self.assertEqual(
             expected_mimetype,
             actual_mimetype,
@@ -285,12 +276,14 @@ class ResolveURITestCase(unittest.TestCase):
     def test_missing_resource(self):
         uri = "/missing.html"
         self.assertRaises(FileNotFoundError, self.call_function_under_test, uri)
-        #self.assertRaises(NameError, self.call_function_under_test, uri)  Question tomorrow
+##########################################################################################
+#Note to Cris - the search for the missing file triggered a FileNotFoundError rather than a NameError exception
+# so I added the additional exception handling
+######################################
 
 
 class HTTPServerFunctionalTestCase(unittest.TestCase):
     """functional tests of the HTTP Server
-
     This test case interacts with the http server, and as such requires it to
     be running in order for the tests to pass
     """
@@ -300,11 +293,13 @@ class HTTPServerFunctionalTestCase(unittest.TestCase):
 
         In case of a socket error, fail and report the problem
         """
+
         response = ''            
         if not use_bytes:
             from simple_client import client
         else:
             from simple_client import bytes_client as client
+            print('\n!!!!!!! travelling through bytes client', file=sys.stderr)
 
         try:
             response = client(message)
@@ -437,9 +432,10 @@ class HTTPServerFunctionalTestCase(unittest.TestCase):
 if __name__ == '__main__':
     unittest.main()
 
+#Debugging stuff follows
 """
 if __name__ == '__main__':
-    suite = unittest.TestLoader().loadTestsFromTestCase(ResolveURITestCase)
+    suite = unittest.TestLoader().loadTestsFromTestCase(HTTPServerFunctionalTestCase)
     unittest.TextTestRunner(verbosity=2).run(suite)
 """
 
@@ -450,3 +446,5 @@ if __name__ == '__main__':
 """
 ###python tests.py ResolveURITestCase.test_file_resource
 ###python tests.py HTTPServerFunctionalTestCase.test_get_request
+####import pdb; pdb.set_trace()    ###import debugger
+#print('!!!!! function_under_test mimetype_one =', mimetype, '\n', file=sys.stderr)  #debug - remove !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
