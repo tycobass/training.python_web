@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 import datetime
+import os
+
 
 default = "No Value Set"
 
@@ -19,10 +21,15 @@ def application(environ, start_response):
     import pprint
     pprint.pprint(environ)
 
+
+   # A combination of a date and a time. Attributes: year, month, day, hour, minute, second, microsecond, and tzinfo.
+
+
+
     response_body = body.format(
         software=environ.get('SERVER_SOFTWARE', default),
-        path="aaaa",
-        month="bbbb",
+        path=os.getcwd(),
+        month=datetime.date.today(),
         date="cccc",
         year="dddd",
         client_ip="eeee"

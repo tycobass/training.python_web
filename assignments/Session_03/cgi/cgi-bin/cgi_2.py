@@ -4,6 +4,8 @@ import cgitb
 cgitb.enable()
 import os
 import datetime
+import sys
+
 
 
 default = "No Value Present"
@@ -23,9 +25,10 @@ body = """<html>
 </body>
 </html>""".format(
     software=os.environ.get('SERVER_SOFTWARE', default),
-    script='aaaa',
+    #script='aaaa',
+    script = sys.argv[0],
     month='bbbb',
-    date='cccc',
+    date='cccccc',
     year='dddd',
     client_ip='eeee'
 )
