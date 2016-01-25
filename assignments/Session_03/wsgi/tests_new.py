@@ -14,44 +14,45 @@ class AdditionTestCase(unittest.TestCase):
     """
 
     def test_no_operand_values(self):
-        from Calculator import addition
+        from calculator import addition
         operands = ""
         expected_values = "Operands provided: []"
         actual = addition(operands)
         self.assertTrue(expected_values in actual)
 
     def test_no_operand_result(self):
-        from Calculator import addition
+        from calculator import addition
         operands = ""
         expected_result = "0"
         actual = addition(operands)
         self.assertTrue(expected_result in actual)
 
     def test_one_operand_values(self):
-        from Calculator import addition
+        from calculator import addition
         operands = "4"
         expected_values = "Operands provided: [4]"
         actual = addition(operands)
         self.assertTrue(expected_values in actual)
 
     def test_one_operand_result(self):
-        from Calculator import addition
+        from calculator import addition
         operands = "4"
         expected_result = "4"
         actual = addition(operands)
         self.assertTrue(expected_result in actual)
 
     def test_three_operands_values(self):
-        from Calculator import addition
-        operands = "4","5","-1"
-        expected_values = "Operands provided: [4,5,-1]"
+        from calculator import addition
+        #import pdb; pdb.set_trace()    ###import debugger
+        operands = '/4/5/-1'
+        expected_values = "Operands provided: [4, 5, -1]"
         actual = addition(operands)
         self.assertTrue(expected_values in actual)
 
     def test_three_operands_result(self):
-        from Calculator import addition
-        operands = "4,5,-1"
-        expected_result = "8"
+        from calculator import addition
+        operands = '/4/5/-1'
+        expected_result = "Sum of operands: 8"
         actual = addition(operands)
         self.assertTrue(expected_result in actual)
 

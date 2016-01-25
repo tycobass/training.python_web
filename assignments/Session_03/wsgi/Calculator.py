@@ -42,6 +42,7 @@ click the example ->   <a href="/division/20/5/3">/division/20/5/3</a><br><br></
 
 
 def addition(*args):
+    #import pdb; pdb.set_trace()    ###import debugger
     page = """
 <h1>Calculator - Addition</h1>
 <p> <font face="Arial", font size="+1">
@@ -89,7 +90,6 @@ Return to Instruction Page
         else:
             final_value = final_value - operand
         counter += 1
-    #import pdb; pdb.set_trace()    ###import debugger
     try:
         final_value
     except NameError:
