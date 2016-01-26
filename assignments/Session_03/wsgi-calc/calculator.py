@@ -1,6 +1,5 @@
 import re
-#from copypaste import copy, paste
-#import Paste #middleware test debugger
+import sys
 
 
 def Instruction():
@@ -42,12 +41,11 @@ click the example ->   <a href="/division/20/5/3">/division/20/5/3</a><br><br></
 
 
 def addition(*args):
-    #import pdb; pdb.set_trace()    ###import debugger
     page = """
 <h1>Calculator - Addition</h1>
 <p> <font face="Arial", font size="+1">
-Operands provided: {}<br><br>
-Sum of operands: {}<br><br><br><br><br>
+Operands provided: {0}<br><br>
+Sum of operands: {1}<br><br><br><br><br>
 </font></p>
 <a href="/"><font face="Arial", font size="+1">
 Return to Instruction Page
@@ -68,9 +66,9 @@ def subtraction(*args):
     page = """
 <h1>Calculator - Subtraction</h1>
 <p> <font face="Arial", font size="+1">
-Operands provided: {}<br>
+Operands provided: {0}<br>
 Operands are subtracted in the order provided<br><br>
-Difference  of operands: {}<br><br><br><br><br>
+Difference  of operands: {1}<br><br><br><br><br>
 </font></p>
 <a href="/"><font face="Arial", font size="+1">
 Return to Instruction Page
@@ -100,14 +98,13 @@ def multiplication(*args):
     page = """
 <h1>Calculator - Multiplication</h1>
 <p> <font face="Arial", font size="+1">
-Operands provided: {}<br><br>
-Result of operand multiplication: {}<br><br><br><br><br>
+Operands provided: {0}<br><br>
+Result of operand multiplication: {1}<br><br><br><br><br>
 </font></p>
 <a href="/"><font face="Arial", font size="+1">
 Return to Instruction Page
 </font></a>
 """
-    #import pdb; pdb.set_trace()    ###import debugger
     comma = ','
     operands = comma.join(args)  #puts the info returned into a string
     operands = operands.lstrip('/').split('/')  # strip off the first "/" and then split all the operands into a list
@@ -133,10 +130,10 @@ def division(*args):
     page = """
 <h1>Calculator - Division</h1>
 <p> <font face="Arial", font size="+1">
-Operands provided: {}<br>
+Operands provided: {0}<br>
 Operands are divided in the order provided<br>
 Attempts to divide by zero will trigger an error<br><br>
-Result of operand division: {}<br><br><br><br><br>
+Result of operand division: {1}<br><br><br><br><br>
 </font></p>
 <a href="/"><font face="Arial", font size="+1">
 Return to Instruction Page
@@ -151,9 +148,6 @@ Return to Instruction Page
     #division of values
     counter =0
     for operand in operands:
-        #if operand == 0:
-         #   raise DivideByZero
-          #  body = "DivideByZero error"
         if counter == 0:
             final_value = operand
         else:
@@ -168,10 +162,10 @@ Return to Instruction Page
 
 def resolve_path(path):
     urls = [(r'^$', Instruction),
-                (r'^addition([/\d+]*)$', addition),
-                (r'^subtraction([/\d+]*)$', subtraction),
-                (r'^multiplication([/\d+]*)$', multiplication),
-                (r'^division([/\d+]*)$', division)
+                (r'^addition([\-?/\d+]*)$', addition),
+                (r'^subtraction([\-?/\d+]*)$', subtraction),
+                (r'^multiplication([\-?/\d+]*)$', multiplication),
+                (r'^division([\-?/\d+]*)$', division)
                 ]
     matchpath = path.lstrip('/')
     for regexp, func in urls:
@@ -195,10 +189,9 @@ def application(environ, start_response):
         body = func(*args)
         status = "200 OK"
     except ZeroDivisionError:
-        ####import pdb; pdb.set_trace()    ###import debugger
         status = "400 Bad Request"
         body = "<h1>Bad Request - Division by Zero</h1>"
-    except NameError:
+    except NameError as e:
         status = "404 Not Found"
         body = "<h1>Not Found</h1>"
     except Exception as e:  # as e give a more verbose stack trace and error explanation

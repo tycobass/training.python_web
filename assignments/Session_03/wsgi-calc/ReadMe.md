@@ -14,3 +14,5 @@ The program will show the list of operands provided and the value
 of the operation.
 Additionally there is a hyperlink to return to the introductory 
 instruction page.
+
+Independently there is a tests.py file that does a static test of the program.
