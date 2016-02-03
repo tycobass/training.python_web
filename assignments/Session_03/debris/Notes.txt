@@ -1,0 +1,21 @@
+[0-9]+ matches any positive integer
+() group characters
+\ escape character
+
+Klueless1! parental control for kindle
+
+To get features in iPython to work in windows - install pyreadline
+https://pypi.python.org/pypi/pyreadline
+
+python urllib parse query
+
+http://www.pyregex.com/
+
+exc_info in sys module gives more complete traceback'
+
+l - list commands
+l 55 - list commands around
+s - step into function
+environ['PATH_INFO'] gives dictionary value
+
+http://localhost:8080/addition/33/44/55/66/77

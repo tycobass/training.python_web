@@ -1,0 +1,3 @@
+import pdb; pdb.set_trace()    ###import debugger#############################
+
+chardet library helps to determine encoding (look up online)
