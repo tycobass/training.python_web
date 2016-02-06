@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><script type="text/javascript">
+    
+      (function() {
+        var relegateNavigation = '';
+        var handleClickTagMessage = function(e) {
+          try {
+            var eventData = JSON.parse(e.data);
+          } catch (err) {
+            return;
+          }
+          if (eventData.isInitClickTag) {
+            if (eventData.clickTags) {
+              for (var i = 0; i < eventData.clickTags.length; i++) {
+                var clkTag = eventData.clickTags[i];
+                window[clkTag.name] = clkTag.url;
+              }
+            } else if (eventData.clickTag) {
+              window.clickTag = eventData.clickTag;
+            }
+            relegateNavigation = eventData.relegateNavigation;
+          }
+        };
+
+        if (open.call) {
+          window.open = function(open) {
+            return function(url, name, features) {
+              if (relegateNavigation === 'parent') {
+                var message = {'clickTag': url, 'isPostClickTag': true};
+                parent.postMessage(JSON.stringify(message), '*');
+              } else {
+                var args = [url, name];
+                if (features) {
+                  args.push(features);
+                }
+                open.apply(window, args);
+              }
+            };
+          }(window.open);
+        }
+
+        if (window.addEventListener) {
+          window.addEventListener(
+              'message', handleClickTagMessage, false);
+        } else {
+          window.attachEvent('onmessage', handleClickTagMessage);
+        }
+      })();
+    
+  </script>
+		<meta charset="utf-8">
+		<title>160x600</title>
+		<link rel="stylesheet" href="index_data/main.css">
+		<script src="index_data/main.js"></script>
+        <script>
+		var clickTag = "";
+	</script> 
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">  	
+	</head>
+	
+	<body onload="startBanner();">
+	
+		<div id="banner">
+        <img class="In" src="index_data/laptop.png" id="laptop">
+        <img class=" In" src="index_data/footer.png" id="footer"> 
+        <img class="Out" src="index_data/copy1.png" id="copy1">
+        <img class="Out" src="index_data/copy2.png" id="copy2">
+        <img class="Out" src="index_data/copy2b.png" id="copy2b">
+        <img class="In" src="index_data/upTo.png" id="upTo">
+        
+        <img class="In" src="index_data/copy3.png" id="copy3">
+        <img class="In" src="index_data/copy4.png" id="copy4">
+        
+        <img class="In" src="index_data/logo.png" id="logo">
+		<img class="In" src="index_data/details_hit.png" id="details_hit">
+
+        <img class="In" src="index_data/cta.png" id="cta">
+              
+<div id="bgExitArea" onclick="javascript:window.open(window.clickTag, '_blank');"></div>
+              
+			<div class="In" id="ctaContainer">
+				<div id="shimmerMask">
+					<div class="on" id="shimmer"></div>
+				</div>
+				<div id="activeArea" onclick="javascript:window.open(window.clickTag, '_blank');"></div>
+			</div>
+			 <img id="legalCopy" src="index_data/details.png">
+			<div style="display: block;" id="legalHoverArea"></div>
+			
+		</div>
+		
+	
+
+</body></html>

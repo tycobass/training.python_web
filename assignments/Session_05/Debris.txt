@@ -1,3 +1,21 @@
 import pdb; pdb.set_trace()    ###import debugger#############################
 
-chardet library helps to determine encoding (look up online)
+view submittal by doc??? - check out click.options, argparse.Argument.Parser
+
+read the "Read This" about MVC framework
+
+search Python gitignore on web and copy list into gitignore
+
+how to show gitignore in sublime
+
+git log shows log of commits
+
+python setup.py develop
+
+pshell development.ini
+
+date and time in UTC
+
+class object takes cls rather than self
+
+make a branch once you have create repository on GitHub

@@ -34,7 +34,6 @@ def get_inspection_page(**kwargs):
     for key, val in kwargs.items():
         if key in INSPECTION_PARAMS:
             params[key] = val
-    import pdb; pdb.set_trace()    ###import debugger#############################
     resp = requests.get(url, params=params)
     resp.raise_for_status()
     return resp.text

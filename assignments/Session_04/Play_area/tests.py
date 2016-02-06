@@ -3,13 +3,19 @@ import unittest
 import sys
 
 
-class AdditionTestCase(unittest.TestCase):
+class get_Inspection_page(unittest.TestCase):
     """unit tests for the addition method in our server
         Static test - server need not be running
     """
 
     def test_get_inspection_page(self):
-        from calculator import addition
+        from mashup_5 import get_inspection_page
+        use_params = {
+        'Inspection_Start': '2/1/2015',
+        'Inspection_End': '2/10/2015',
+        'Zip_Code': '98105',
+        'Violation_Red_Points': '200'
+        }
         operands = ""
         expected_values = "Operands provided: []"
         actual = addition(operands)
