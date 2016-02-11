@@ -19,3 +19,9 @@ date and time in UTC
 class object takes cls rather than self
 
 make a branch once you have create repository on GitHub
+
+for data_div in data_list[:count]:
+        metadata = extract_restaurant_metadata(data_div)
+        inspection_data = get_score_data(data_div)
+        metadata.update(inspection_data)
+        yield metadata

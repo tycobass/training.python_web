@@ -1,0 +1,35 @@
+
+SQLAlchemy ORM   CORE
+    ^
+     |
+DBAP12  sqlite3    psycopg2
+     ^
+     |
+DB - sqlite
+
+Use to view the data:
+def __repr__(self):
+return "   ".format
+self.id, self.title
+
+or use __str__ method
+or use __json__ method
+
+{% extends "templates/layout.jinja2" %}
+{% block body %}
+<form action="." method="POST">      ##################take the . out of the action
+{% for field in form %}
+  {% if field.errors %}
+    <ul>
+    {% for error in field.errors %}
+        <li>{{ error }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+    <p>{{ field.label }}: {{ field }}</p>
+{% endfor %}
+    <p><input type="submit" name="submit" value="Submit" /></p>
+</form>
+{% endblock %}
+
+edit form must have an id associated with it but not showing
