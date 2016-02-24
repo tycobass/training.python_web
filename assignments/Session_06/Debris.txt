@@ -17,7 +17,7 @@ or use __json__ method
 
 {% extends "templates/layout.jinja2" %}
 {% block body %}
-<form action="." method="POST">      ##################take the . out of the action
+<form action="." method="POST">      ##################take the . out of the action (fixed in class notes)
 {% for field in form %}
   {% if field.errors %}
     <ul>
@@ -32,4 +32,17 @@ or use __json__ method
 </form>
 {% endblock %}
 
-edit form must have an id associated with it but not showing
+
+In layout.jinja2 what does the line do? 
+<section id="content">
+
+In edit.jinja2 what does the line do?
+<form action="" method="POST">
+
+In edit.jinja2 what does the if block do?
+{% if field.errors %}
+
+In edit.jinja2 why do only the title and body fields show up and not the date?
+<p>{{ field.label }}: {{ field }}</p>
+
+Check documentation for hidden field

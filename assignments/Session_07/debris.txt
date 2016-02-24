@@ -1,0 +1,11 @@
+remove -e learning-journal==0.0 from the requirements file created from pip freeze
+
+
+How do I see what is in the Heroku repository?  same as what is in the repository
+
+This is a workaround for the inability to build a database:
+heroku run bash (switches to a bash shell)
+./build_db
+
+
+	
