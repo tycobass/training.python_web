@@ -1,0 +1,16 @@
+user: eric
+tycobass@gmail.com
+Rabbits!
+flora, fauna, meriweather
+cinderella
+
+Models go in the models.py
+
+check base.html against Cris's stuff
+
+updates to models.py
+for inline editing
+from django.contrib import admin  #<== added esv
+to fix category(s)
+    class Meta: #<== added esv
+        verbose_name_plural = "categories"  #<== added esv
